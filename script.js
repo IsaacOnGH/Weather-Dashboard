@@ -13,19 +13,42 @@ searchForm.addEventListener('submit', async function (event) {
         return;
     }
 
-    // Fetch current weather data
     const currentWeatherData = await fetchCurrentWeather(city);
     displayCurrentWeather(currentWeatherData);
 
-    // Fetch forecast data
     const forecastData = await fetchForecast(city);
     displayForecast(forecastData);
 
-    // Add city to search history
     if (!searchHistory.includes(city)) {
         searchHistory.push(city);
         updateSearchHistory();
     }
 
-    cityInput.value = ''; // Clear input
+    cityInput.value = ''; 
 });
+
+async function fetchCurrentWeather(city) {
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+    
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching current weather:', error);
+        return null;
+    }
+}
+
+async function fetchForecast(city) {
+    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+    
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching forecast:', error);
+        return null;
+    }
+}
