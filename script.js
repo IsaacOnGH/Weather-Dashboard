@@ -52,3 +52,62 @@ async function fetchForecast(city) {
         return null;
     }
 }
+
+function displayCurrentWeather(data) {
+
+    if (!data) {
+        
+        return;
+    }
+
+    currentWeatherSection.innerHTML = `
+        <h2>Current Weather in ${data.name}</h2>
+        <p>Date: ${new Date().toLocaleDateString()}</p>
+        <p>Temperature: ${data.main.temp} °C</p>
+        <p>Humidity: ${data.main.humidity}%</p>
+        <p>Wind Speed: ${data.wind.speed} m/s</p>
+        <!-- You can add an icon here using data.weather[0].icon -->
+    `;
+}
+
+function displayForecast(data) {
+
+    if (!data) {
+        
+        return;
+    }
+
+    const forecastItems = data.list.slice(0, 5);
+    forecastSection.innerHTML = `
+        <h2>5-Day Forecast</h2>
+        <ul>
+            ${forecastItems.map(item => `
+                <li>
+                    <p>Date: ${item.dt_txt}</p>
+                    <p>Temperature: ${item.main.temp} °C</p>
+                    <p>Humidity: ${item.main.humidity}%</p>
+                    <p>Wind Speed: ${item.wind.speed} m/s</p>
+                    <!-- You can add an icon here using item.weather[0].icon -->
+                </li>
+            `).join('')}
+        </ul>
+    `;
+}
+
+function updateSearchHistory() {
+   
+    const historyList = document.getElementById('search-history');
+    historyList.innerHTML = searchHistory.map(city => `<li>${city}</li>`).join('');
+}
+
+
+function init() {
+  
+    const storedSearchHistory = localStorage.getItem('searchHistory');
+    if (storedSearchHistory) {
+        searchHistory = JSON.parse(storedSearchHistory);
+        updateSearchHistory();
+    }
+}
+
+init();
