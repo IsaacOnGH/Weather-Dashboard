@@ -28,7 +28,6 @@ Weather Dashboard is a web application that allows users to search for weather i
 2. Click the "Search" button.
 3. Current weather details and a 5-day forecast will be displayed.
 4. Search history will be maintained for easy access to previously searched cities.
-5. Click on a city in the search history to see its weather details again.
 
 ## Technologies and Dependencies
 
