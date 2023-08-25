@@ -10,20 +10,28 @@
     <header>
         <h1>Weather Dashboard</h1>
     </header>
-    <main>
-        <form id="search-form">
+    <main class="container">
+        <div class="left-section">
+            <form id="search-form">
             <input type="text" id="city-input" placeholder="Enter city name">
             <button type="submit">Search</button>
-        </form>
-        <section id="current-weather">
-            <!-- Current weather details will be displayed here -->
-        </section>
-        <section id="forecast">
-            <!-- 5-day forecast will be displayed here -->
-        </section>
-        <section id="search-history">
+            </form>
+            <section id="search-history">
             <!-- Search history will be displayed here -->
-        </section>
+            </section>
+        </div>
+       
+        <div class="right-section">
+            <section id="current-weather">
+                <!-- Current weather details will be displayed here -->
+            </section>
+        </div>
+        <div class="bottom">
+            <section id="forecast">
+                <!-- 5-day forecast will be displayed here -->
+            </section>   
+        </div>
+            
     </main>
     <script src="script.js"></script>
 </body>

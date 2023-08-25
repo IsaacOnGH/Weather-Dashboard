@@ -1,4 +1,4 @@
-const apiKey = process.env.OPENWEATHERMAP_API_KEY;
+const apiKey = '1355bcfc098f8643a94ff3dcb00a65a7';
 const searchForm = document.getElementById('search-form');
 const cityInput = document.getElementById('city-input');
 const currentWeatherSection = document.getElementById('current-weather');
@@ -66,7 +66,7 @@ function displayCurrentWeather(data) {
         <p>Temperature: ${data.main.temp} °C</p>
         <p>Humidity: ${data.main.humidity}%</p>
         <p>Wind Speed: ${data.wind.speed} m/s</p>
-        <!-- You can add an icon here using data.weather[0].icon -->
+        <img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="weather icon">  
     `;
 }
 
@@ -77,27 +77,47 @@ function displayForecast(data) {
         return;
     }
 
-    const forecastItems = data.list.slice(0, 5);
+    const originalForecastItems = data.list;
+
+    const forecastItems = originalForecastItems.filter((item, index) => { return index % 8 === 0;
+    });
+    
     forecastSection.innerHTML = `
         <h2>5-Day Forecast</h2>
-        <ul>
+        <div id="forecast">
             ${forecastItems.map(item => `
-                <li>
+                <div>
                     <p>Date: ${item.dt_txt}</p>
+                </div>
+                <br>
+                <div>
                     <p>Temperature: ${item.main.temp} °C</p>
+                </div>
+                <br>
+                <div>
                     <p>Humidity: ${item.main.humidity}%</p>
+                </div>
+                <br>
+                <div>
                     <p>Wind Speed: ${item.wind.speed} m/s</p>
-                    <!-- You can add an icon here using item.weather[0].icon -->
-                </li>
+                </div>
+                <br>
+                <div>
+                    <img src="http://openweathermap.org/img/w/${item.weather[0].icon}.png" alt="weather icon">
+                </div>
+                <br>
             `).join('')}
-        </ul>
+        </div>
     `;
+    console.log(forecastItems);
+    console.log(originalForecastItems);
+    console.log(data);
 }
 
 function updateSearchHistory() {
    
     const historyList = document.getElementById('search-history');
-    historyList.innerHTML = searchHistory.map(city => `<li>${city}</li>`).join('');
+    historyList.innerHTML = searchHistory.map(city => `<p>${city}</p>`).join('');
 }
 
 
