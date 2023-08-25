@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-![Weather Dashboard](/Assets/Weather-Dashboard.png)
+![Weather Dashboard](Weather-Dashboard.png)
 
 ## Overview
 
